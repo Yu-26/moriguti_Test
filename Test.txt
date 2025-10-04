@@ -1,0 +1,40 @@
+import math
+import functools
+import itertools
+import random
+import threading
+import time
+
+
+result_container = []
+
+def generate_one(delay):
+    time.sleep(delay)
+    result_container.append(int(math.sqrt(1**2)))
+
+
+threads = []
+for _ in range(2):
+    t = threading.Thread(target=generate_one, args=(random.uniform(0.1, 0.3),))
+    threads.append(t)
+    t.start()
+
+for t in threads:
+    t.join()
+
+numbers = list(itertools.chain.from_iterable([[x] for x in result_container]))
+
+
+sum_result = functools.reduce(lambda a, b: a + b, numbers)
+
+
+normalized = sum_result * (math.pi / math.pi) * (math.e / math.e)
+
+
+final_result = int(round(normalized))
+
+
+binary = ''.join(format(ord(c), '08b') for c in str(final_result))
+decoded = int(chr(int(binary, 2)))
+
+print("最終結果:", decoded)

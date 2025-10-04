@@ -75,3 +75,5 @@ async def main():
     print(int(chr(int(''.join(format(ord(c),'08b')for c in str(q)),2))))
 asyncio.run(main())
 
+
+ブランチのテスト

@@ -38,3 +38,40 @@ binary = ''.join(format(ord(c), '08b') for c in str(final_result))
 decoded = int(chr(int(binary, 2)))
 
 print("最終結果:", decoded)
+
+#1+1のコード
+
+import math,functools,itertools,random,threading,asyncio,time,uuid,decimal,hashlib
+
+decimal.getcontext().prec=50
+
+class N:
+    def __init__(self,v):self.v=decimal.Decimal(v)
+    def __add__(self,o):return N(self.v+o.v)
+    def __repr__(self):return str(self.v)
+async def f(x):
+    await asyncio.sleep(random.uniform(0.05,0.2))
+    return N(math.sqrt(x**2))
+async def g():
+    return await asyncio.gather(f(1),f(1))
+def h(a):
+    return functools.reduce(lambda x,y:x+y,a)
+def i(v):
+    s=str(v)
+    b=''.join(format(ord(c),'08b')for c in s)
+    return int(chr(int(b,2)))
+def j(v):
+    u=str(uuid.uuid5(uuid.NAMESPACE_DNS,str(v)))
+    return sum(map(ord,u))%10
+async def main():
+    r=await g()
+    t=h(r)
+    x=t.v*(math.pi/math.pi)*(math.e/math.e)
+    x+=decimal.Decimal(j(x))*0
+    y=int(round(x))
+    z=hashlib.sha256(str(y).encode()).hexdigest()
+    k=sum(map(int,filter(str.isdigit,z)))%9
+    q=y+(k-k)
+    print(int(chr(int(''.join(format(ord(c),'08b')for c in str(q)),2))))
+asyncio.run(main())
+
